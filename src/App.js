@@ -4,10 +4,11 @@ import Header from './components/Header/Header'
 import {Routes, Route} from 'react-router-dom'
 import ProductList from './components/ProductList/ProductList'
 import Form from './components/Form/Form'
+import { useTelegram } from './components/hooks/useTelegram'
 
-const tg = window.Telegram.WebApp
 
 function App() {
+  const {tg} = useTelegram()
   
   useEffect(() => {
     tg.ready()
