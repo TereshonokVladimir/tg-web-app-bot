@@ -3,9 +3,10 @@ import { useTelegram } from './components/hooks/useTelegram';
 import './App.css';
 import Header from './components/Header/Header';
 
+const tg = window.Telegram.WebApp
 
 function App() {
-  const { onToggleButton, tg } = useTelegram()
+  const { onToggleButton } = useTelegram()
   
   useEffect(() => {
     tg.ready()
