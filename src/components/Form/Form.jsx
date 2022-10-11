@@ -23,15 +23,15 @@ const Form = () => {
 
     useEffect(() => {
         window.Telegram.WebApp.MainButton.setParams({
-            text: 'Отправить данные'
+            text: 'Send data'
         })
     }, [])
 
     useEffect(() => {
         if(!street || !country) {
-            window.Telegram.WebApp.MainButton.hide();
+            window.Telegram.WebApp.MainButton.hide()
         } else {
-            window.Telegram.WebApp.MainButton.show();
+            window.Telegram.WebApp.MainButton.show()
         }
     }, [country, street])
 
@@ -49,24 +49,24 @@ const Form = () => {
 
     return (
         <div className={"form"}>
-            <h3>Введите ваши данные</h3>
+            <h3>Enter your data</h3>
             <input
                 className={'input'}
                 type="text"
-                placeholder={'Страна'}
+                placeholder={'Country'}
                 value={country}
                 onChange={onChangeCountry}
             />
             <input
                 className={'input'}
                 type="text"
-                placeholder={'Улица'}
+                placeholder={'Street'}
                 value={street}
                 onChange={onChangeStreet}
             />
             <select value={subject} onChange={onChangeSubject} className={'select'}>
-                <option value={'physical'}>Физ. лицо</option>
-                <option value={'legal'}>Юр. лицо</option>
+                <option value={'physical'}>Individual</option>
+                <option value={'legal'}>Legal entity</option>
             </select>
         </div>
     );
