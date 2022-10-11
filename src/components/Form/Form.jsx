@@ -6,35 +6,33 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const {tg} = useTelegram();
-
     const onSendData = useCallback(() => {
         const data = {
             country,
             street,
             subject
         }
-        tg.sendData(JSON.stringify(data));
+        window.Telegram.WebApp.sendData(JSON.stringify(data));
     }, [country, street, subject])
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
+        window.Telegram.WebApp.onEvent('mainButtonClicked', onSendData)
         return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
+            window.Telegram.WebApp.offEvent('mainButtonClicked', onSendData)
         }
     }, [onSendData])
 
     useEffect(() => {
-        tg.MainButton.setParams({
+        window.Telegram.WebApp.MainButton.setParams({
             text: 'Отправить данные'
         })
     }, [])
 
     useEffect(() => {
         if(!street || !country) {
-            tg.MainButton.hide();
+            window.Telegram.WebApp.MainButton.hide();
         } else {
-            tg.MainButton.show();
+            window.Telegram.WebApp.MainButton.show();
         }
     }, [country, street])
 
