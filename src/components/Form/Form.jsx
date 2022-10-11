@@ -1,12 +1,11 @@
 import React, {useState, useEffect, useCallback } from 'react'
-import { useTelegram } from '../hooks/useTelegram'
 import './Form.css'
 
 const Form = () => {
   const [country, setCountry] = useState('')
   const [street, setStreet] = useState('')
   const [subject, setSubject] = useState('physical')
-  const {tg} = useTelegram()
+ 
 
   const onSendData = useCallback(() => {
       const data = {
@@ -14,28 +13,28 @@ const Form = () => {
         street,
         subject,
       }
-      tg.onSendData(JSON.stringify(data))
-    }, [])
+      window.Telegram.WebApp.onSendData(JSON.stringify(data))
+    }, [country, street, subject])
 
     useEffect(() => {
-      tg.onEvent('mainButtonClicked', onSendData)
+      window.Telegram.WebApp.onEvent('mainButtonClicked', onSendData)
     
       return () => {
-        tg.offEvent('mainButtonClicked', onSendData)
+        window.Telegram.WebApp.offEvent('mainButtonClicked', onSendData)
       }
-    }, [])
+    }, [onSendData])
     
   useEffect(() => {
-    tg.MainButton.setParams({
+    window.Telegram.WebApp.MainButton.setParams({
       text: 'Send data'
     })
   }, [])
 
   useEffect(() => {
     if (!street || !country) {
-      tg.MainButton.hide()
+      window.Telegram.WebApp.MainButton.hide()
     } else {
-      tg.MainButton.show()
+      window.Telegram.WebApp.MainButton.show()
     }
   }, [])
   

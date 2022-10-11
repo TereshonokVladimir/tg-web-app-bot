@@ -8,10 +8,9 @@ import { useTelegram } from './components/hooks/useTelegram'
 
 
 function App() {
-  const {tg} = useTelegram()
   
   useEffect(() => {
-    tg.ready()
+    window.Telegram.WebApp.ready()
   }, [])
 
   return (
